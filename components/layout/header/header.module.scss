@@ -1,0 +1,28 @@
+.header {
+  box-shadow: var(--shadow);
+  background-color: var(--colors-ui-base);
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+
+    .link {
+      color: var(--colors-text);
+      font-size: var(--fs-sm);
+      text-decoration: none;
+      font-weight: var(--fw-bold);
+    }
+
+    .switcher {
+      display: flex;
+      align-items: center;
+      column-gap: 0.75rem;
+      color: var(--colors-text);
+      font-size: var(--fs-sm);
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+  }
+}
