@@ -28,7 +28,7 @@ export const Header = () => {
             ) : (
               <IoMoon size="14px" />
             )}
-
+            
             <span>{theme} Theme</span>
           </div>
         </div>

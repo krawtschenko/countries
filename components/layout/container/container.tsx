@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import s from './container.module.scss';
 
-type Props = {} & ComponentProps<'div'>;
+type Props = ComponentProps<'div'>;
 
 export const Container = ({ children, ...props }: Props) => {
   return (
