@@ -4,6 +4,7 @@
   justify-content: space-between;
   background-color: var(--colors-ui-base);
   color: var(--colors-text);
+  font-size: var(--fs-sm);
   border: none;
   border-radius: var(--radii);
   padding: 0.38rem 0.75rem;
@@ -11,10 +12,6 @@
   width: 200px;
   height: 50px;
   cursor: pointer;
-
-  &:hover {
-    background-color: maroon;
-  }
 
   &:focus-visible {
     outline: 2px solid #2563eb;
@@ -54,25 +51,22 @@
   background-color: var(--colors-ui-base);
   border-radius: var(--radii);
   cursor: pointer;
-
-  .selectViewport {
-    padding: 5px;
-  }
+  box-shadow: var(--shadow);
 
   .selectItem {
-    background-color: var(--colors-ui-base);
-    color: var(--colors-text);
     display: flex;
     align-items: center;
     height: 25px;
     padding: 0 35px 0 25px;
     position: relative;
     user-select: none;
+    background-color: var(--colors-ui-base);
+    color: var(--colors-text);
+    font-size: var(--fs-sm);
 
     &[data-highlighted] {
       outline: none;
-      background-color: aquamarine;
-      color: sienna;
+      background-color: var(--colors-bg);
     }
 
     &[data-state='checked'] {

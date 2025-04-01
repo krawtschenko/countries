@@ -23,12 +23,10 @@ export const Select = ({ children, ...props }: SelectProps) => (
     <SelectRadix.Portal>
       <SelectRadix.Content
         position={'popper'}
-        sideOffset={5}
+        sideOffset={8}
         className={s.selectContent}
       >
-        <SelectRadix.Viewport className={s.selectViewport}>
-          {children}
-        </SelectRadix.Viewport>
+        <SelectRadix.Viewport>{children}</SelectRadix.Viewport>
       </SelectRadix.Content>
     </SelectRadix.Portal>
   </SelectRadix.Root>
