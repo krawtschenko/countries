@@ -8,11 +8,22 @@ import { useEffect, useState } from 'react';
 export const Header = () => {
   const [theme, setTheme] = useState('light');
 
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   return (
     <header className={s.header}>
@@ -28,7 +39,7 @@ export const Header = () => {
             ) : (
               <IoMoon size="14px" />
             )}
-            
+
             <span>{theme} Theme</span>
           </div>
         </div>

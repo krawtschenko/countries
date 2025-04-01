@@ -9,15 +9,23 @@ type SelectProps = ComponentProps<typeof SelectRadix.Root>;
 export const Select = ({ children, ...props }: SelectProps) => (
   <SelectRadix.Root name="select" {...props}>
     <SelectRadix.Trigger className={s.selectTrigger}>
-      <SelectRadix.Value placeholder="Select a fruit…" />
+      <SelectRadix.Value />
 
-      <SelectRadix.Icon className={s.selectIcon}>
-        <IoChevronDownOutline />
-      </SelectRadix.Icon>
+      <span className={s.iconWrapper}>
+        <span className={s.separator}></span>
+
+        <SelectRadix.Icon className={s.selectIcon}>
+          <IoChevronDownOutline />
+        </SelectRadix.Icon>
+      </span>
     </SelectRadix.Trigger>
 
     <SelectRadix.Portal>
-      <SelectRadix.Content position={'popper'} className={s.selectContent}>
+      <SelectRadix.Content
+        position={'popper'}
+        sideOffset={5}
+        className={s.selectContent}
+      >
         <SelectRadix.Viewport className={s.selectViewport}>
           {children}
         </SelectRadix.Viewport>

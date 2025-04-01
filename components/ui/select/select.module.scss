@@ -1,16 +1,15 @@
 .selectTrigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  column-gap: 5px;
-  border: none;
-  border-radius: var(--radii);
-  padding: 0.25rem;
-  width: 200px;
-  height: 50px;
+  justify-content: space-between;
   background-color: var(--colors-ui-base);
   color: var(--colors-text);
+  border: none;
+  border-radius: var(--radii);
+  padding: 0.38rem 0.75rem;
   box-shadow: var(--shadow);
+  width: 200px;
+  height: 50px;
   cursor: pointer;
 
   &:hover {
@@ -21,18 +20,30 @@
     outline: 2px solid #2563eb;
   }
 
-  .selectIcon {
-    color: salmon;
-    transition: all 0.3s ease;
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    .separator {
+      width: 1px;
+      height: 26px;
+      background-color: rgb(204, 204, 204);
+    }
+
+    .selectIcon {
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      transition: all 0.2s ease;
+    }
   }
 
   &[data-state='open'] {
-    border-bottom-left-radius: unset;
-    border-bottom-right-radius: unset;
-
-    .selectIcon {
-      color: salmon;
-      transform: rotate(180deg);
+    .iconWrapper {
+      .selectIcon {
+        transform: rotate(180deg);
+      }
     }
   }
 }
@@ -41,26 +52,16 @@
   width: var(--radix-select-trigger-width);
   overflow: hidden;
   background-color: var(--colors-ui-base);
-  border-radius: 6px;
-  box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35),
-  0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  border-radius: var(--radii);
   cursor: pointer;
-
-  &[data-state='open'] {
-    border-top-left-radius: unset;
-    border-top-right-radius: unset;
-  }
 
   .selectViewport {
     padding: 5px;
   }
 
   .selectItem {
-    font-size: 13px;
-    line-height: 1;
     background-color: var(--colors-ui-base);
     color: var(--colors-text);
-    border-radius: 3px;
     display: flex;
     align-items: center;
     height: 25px;
