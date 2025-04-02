@@ -10,7 +10,6 @@ export const Search = ({ search, setSearch }: Props) => {
   return (
     <label className={s.container}>
       <IoSearch />
-
       <input
         id="search-input"
         className={s.input}

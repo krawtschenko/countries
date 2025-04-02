@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
+import { Providers } from '@/app/providers';
 import { Header } from '@/components/layout/header/header';
 import { Main } from '@/components/layout/main/main';
 import { Controls } from '@/components/ui/controls/controls';
@@ -25,13 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunitoSans.className}>
-        <Header />
+        <Providers>
+          <Header />
 
-        <Main>
-          <Controls />
-
-          {children}
-        </Main>
+          <Main>
+            <Controls />
+            {children}
+          </Main>
+        </Providers>
       </body>
     </html>
   );

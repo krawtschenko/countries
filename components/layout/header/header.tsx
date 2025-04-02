@@ -6,18 +6,18 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export const Header = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.body.setAttribute('data-theme', savedTheme);
-    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+
+    setTheme(savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
+
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.body.setAttribute('data-theme', newTheme);
@@ -37,8 +37,7 @@ export const Header = () => {
             ) : (
               <IoMoon size="14px" />
             )}
-
-            <span>{theme} Theme</span>
+            <span>{theme} Mode</span>
           </div>
         </div>
       </Container>
