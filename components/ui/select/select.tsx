@@ -13,6 +13,7 @@ export const Select = ({ children, ...props }: SelectProps) => (
 
       <span className={s.iconWrapper}>
         <span className={s.separator}></span>
+        
         <SelectRadix.Icon className={s.selectIcon}>
           <IoChevronDownOutline />
         </SelectRadix.Icon>

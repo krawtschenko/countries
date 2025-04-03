@@ -1,12 +1,14 @@
 import { Container } from '@/components/layout/container/container';
 import s from './main.module.scss';
-import { ComponentProps } from 'react';
+import { ReactNode } from 'react';
 
-type Props = ComponentProps<'main'>;
+type Props = {
+  children: ReactNode;
+};
 
-export const Main = ({ children, ...props }: Props) => {
+export const Main = ({ children }: Props) => {
   return (
-    <main className={s.main} {...props}>
+    <main className={s.main}>
       <Container>{children}</Container>
     </main>
   );
