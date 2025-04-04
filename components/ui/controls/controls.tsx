@@ -4,19 +4,26 @@ import { useState } from 'react';
 import { Select, SelectItem } from '@/components/ui/select/select';
 import s from './controls.module.scss';
 
-const options = [
-  { value: 'default', label: 'Filter by Region' },
-  { value: 'africa', label: 'Africa' },
-  { value: 'america', label: 'America' },
-  { value: 'asia', label: 'Asia' },
-  { value: 'europe', label: 'Europe' },
-  { value: 'oceania', label: 'Oceania' },
-];
+type Props = {
+  search: string;
+  region: string;
+  setSearch: (search: string) => void;
+  setRegion: (region: string) => void;
+  options: Options[];
+};
 
-export const Controls = () => {
-  const [search, setSearch] = useState('');
-  const [region, setRegion] = useState(options[0].value);
+type Options = {
+  value: string;
+  label: string;
+};
 
+export const Controls = ({
+  search,
+  region,
+  setSearch,
+  setRegion,
+  options,
+}: Props) => {
   return (
     <div className={s.wrapper}>
       <Search search={search} setSearch={setSearch} />

@@ -4,8 +4,21 @@ import { Controls } from '@/components/ui/controls/controls';
 import { List } from '@/components/ui/list/list';
 import { Card, Info } from '@/components/ui/card/card';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+const options = [
+  { value: 'default', label: 'Filter by Region' },
+  { value: 'africa', label: 'Africa' },
+  { value: 'america', label: 'America' },
+  { value: 'asia', label: 'Asia' },
+  { value: 'europe', label: 'Europe' },
+  { value: 'oceania', label: 'Oceania' },
+];
 
 export default function Home() {
+  const [search, setSearch] = useState('');
+  const [region, setRegion] = useState(options[0].value);
+
   const router = useRouter();
   const { data, isLoading } = useCountries();
 
@@ -19,7 +32,13 @@ export default function Home() {
 
   return (
     <>
-      <Controls />
+      <Controls
+        search={search}
+        region={region}
+        setSearch={setSearch}
+        setRegion={setRegion}
+        options={options}
+      />
 
       <List>
         {countries?.map((country) => {
