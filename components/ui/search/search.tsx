@@ -1,4 +1,4 @@
-import { IoSearch } from 'react-icons/io5';
+import { IoSearch, IoClose } from 'react-icons/io5';
 import s from './search.module.scss';
 
 type Props = {
@@ -9,8 +9,10 @@ type Props = {
 export const Search = ({ search, setSearch }: Props) => {
   return (
     <label className={s.container}>
-      <IoSearch />
-      
+      <span className={s.search}>
+        <IoSearch />
+      </span>
+
       <input
         id="search-input"
         className={s.input}
@@ -19,6 +21,12 @@ export const Search = ({ search, setSearch }: Props) => {
         type={search}
         placeholder={'Search for a country...'}
       />
+
+      {search && (
+        <button className={s.clear} onClick={() => setSearch('')}>
+          <IoClose />
+        </button>
+      )}
     </label>
   );
 };

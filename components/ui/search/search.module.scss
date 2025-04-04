@@ -3,25 +3,41 @@
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
-
   border-radius: var(--radii);
   box-shadow: var(--shadow);
   width: 100%;
   height: 50px;
   margin-bottom: 1rem;
-  font-size: var(--fs-md);
 
   @media (min-width: 767px) {
     margin-bottom: 0;
     width: 280px;
   }
 
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
   .input {
+    width: 100%;
     margin-left: 2rem;
     border: none;
     outline: none;
     font-size: var(--fs-sm);
     color: var(--colors-text);
     background-color: var(--colors-ui-base);
+  }
+
+  .clear {
+    all: unset;
+    margin-left: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
   }
 }

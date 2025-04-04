@@ -3,28 +3,59 @@ import { useCountries } from '@/hooks/useCountries';
 import { Controls } from '@/components/ui/controls/controls';
 import { List } from '@/components/ui/list/list';
 import { Card, Info } from '@/components/ui/card/card';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useLayoutEffect, useState } from 'react';
 
 const options = [
   { value: 'default', label: 'Filter by Region' },
   { value: 'africa', label: 'Africa' },
-  { value: 'america', label: 'America' },
+  { value: 'americas', label: 'Americas' },
   { value: 'asia', label: 'Asia' },
   { value: 'europe', label: 'Europe' },
   { value: 'oceania', label: 'Oceania' },
 ];
 
 export default function Home() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { data: countries, isLoading } = useCountries();
+
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState(options[0].value);
 
-  const router = useRouter();
-  const { data, isLoading } = useCountries();
-
-  const countries = data
-    ?.slice()
+  const filteredCountries = countries
+    ?.filter((country) =>
+      country.name.common.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((country) =>
+      region === 'default' ? true : country.region.toLowerCase() === region
+    )
     .sort((a, b) => a.name.common.localeCompare(b.name.common));
+
+  const updateSearchParams = (newSearch: string, newRegion: string) => {
+    const params = new URLSearchParams();
+    if (newSearch) params.set('search', newSearch);
+    if (newRegion && newRegion !== 'default') params.set('region', newRegion);
+    router.replace(`/?${params.toString()}`);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    updateSearchParams(value, region);
+  };
+
+  const handleRegionChange = (value: string) => {
+    setRegion(value);
+    updateSearchParams(search, value);
+  };
+
+  useLayoutEffect(() => {
+    const defaultSearch = searchParams.get('search') || '';
+    const defaultRegion = searchParams.get('region') || 'default';
+
+    setSearch(defaultSearch);
+    setRegion(defaultRegion);
+  }, []);
 
   if (isLoading) {
     return <h1>IS LOADING...</h1>;
@@ -35,13 +66,13 @@ export default function Home() {
       <Controls
         search={search}
         region={region}
-        setSearch={setSearch}
-        setRegion={setRegion}
+        setSearch={handleSearchChange}
+        setRegion={handleRegionChange}
         options={options}
       />
 
       <List>
-        {countries?.map((country) => {
+        {filteredCountries?.map((country) => {
           const info: Info[] = [
             {
               title: 'Population',
