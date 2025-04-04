@@ -1,25 +1,28 @@
 'use client';
 import { useCountries } from '@/hooks/useCountries';
 import { Controls } from '@/components/ui/controls/controls';
-import { Main } from '@/components/layout/main/main';
 import { List } from '@/components/ui/list/list';
 import { Card, Info } from '@/components/ui/card/card';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const { data } = useCountries();
-
-  if (!data) return;
+  const router = useRouter();
+  const { data, isLoading } = useCountries();
 
   const countries = data
     ?.slice()
     .sort((a, b) => a.name.common.localeCompare(b.name.common));
 
+  if (isLoading) {
+    return <h1>IS LOADING...</h1>;
+  }
+
   return (
-    <Main>
+    <>
       <Controls />
 
       <List>
-        {countries.map((country) => {
+        {countries?.map((country) => {
           const info: Info[] = [
             {
               title: 'Population',
@@ -35,16 +38,21 @@ export default function Home() {
             },
           ];
 
+          const handleClick = () => {
+            router.push(`/country/${country.name.common}`);
+          };
+
           return (
             <Card
-              key={country.name.official}
+              key={country.name.common}
               img={country.flags.png}
               name={country.name.common}
               info={info}
+              onClick={handleClick}
             />
           );
         })}
       </List>
-    </Main>
+    </>
   );
 }

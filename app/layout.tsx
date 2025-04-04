@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
-import { Providers } from '@/app/providers';
+import { Provider } from '@/components/layout/provider/provider';
 
 export const metadata: Metadata = {
   title: 'Countries',
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunitoSans.className}>
-        <Providers>{children}</Providers>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
