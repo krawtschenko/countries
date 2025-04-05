@@ -5,6 +5,7 @@ import { List } from '@/components/ui/list/list';
 import { Card, Info } from '@/components/ui/card/card';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useLayoutEffect, useState } from 'react';
+import { Loader } from '@/components/ui/loader/loader';
 
 const options = [
   { value: 'default', label: 'Filter by Region' },
@@ -18,12 +19,12 @@ const options = [
 export default function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: countries, isLoading } = useCountries();
+  const { data, isLoading } = useCountries();
 
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState(options[0].value);
 
-  const filteredCountries = countries
+  const filteredCountries = data
     ?.filter((country) =>
       country.name.common.toLowerCase().includes(search.toLowerCase())
     )
@@ -57,8 +58,8 @@ export default function Home() {
     setRegion(defaultRegion);
   }, []);
 
-  if (isLoading) {
-    return <h1>IS LOADING...</h1>;
+  if (isLoading || !data) {
+    return <Loader />;
   }
 
   return (
@@ -66,8 +67,8 @@ export default function Home() {
       <Controls
         search={search}
         region={region}
-        setSearch={handleSearchChange}
-        setRegion={handleRegionChange}
+        setSearchAction={handleSearchChange}
+        setRegionAction={handleRegionChange}
         options={options}
       />
 
@@ -95,7 +96,7 @@ export default function Home() {
           return (
             <Card
               key={country.name.common}
-              img={country.flags.png}
+              img={country.flags.svg}
               name={country.name.common}
               info={info}
               onClick={handleClick}

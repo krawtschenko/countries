@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
-import { Provider } from '@/components/layout/provider/provider';
+import { Provider } from '@/app/provider';
 
 export const metadata: Metadata = {
   title: 'Countries',
