@@ -5,6 +5,7 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useCountry } from '@/hooks/useCountry';
 import { Button } from '@/components/ui/button/button';
 import { Info } from '@/components/ui/info/info';
+import { Loader } from '@/components/ui/loader/loader';
 
 type Props = {
   params: Promise<{ name: string }>;
@@ -13,10 +14,10 @@ type Props = {
 export default function Details({ params }: Props) {
   const { name } = use(params);
   const router = useRouter();
-  const { data } = useCountry(name);
+  const { data, isLoading } = useCountry(name);
 
-  if (!data) {
-    return null;
+  if (isLoading || !data) {
+    return <Loader />;
   }
 
   const country = data?.[0];
