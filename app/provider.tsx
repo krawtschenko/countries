@@ -14,6 +14,7 @@ export const Provider = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
+      <div id="loader"></div>
       <Main>{children}</Main>
     </QueryClientProvider>
   );

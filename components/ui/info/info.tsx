@@ -23,7 +23,7 @@ export const Info = (props: Props) => {
   const { data: borders, isLoading } = useFilter(props.borders);
 
   if (isLoading || !borders) {
-    return <Loader />;
+    return <Loader id="loader" />;
   }
 
   return (

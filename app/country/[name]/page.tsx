@@ -17,7 +17,7 @@ export default function Details({ params }: Props) {
   const { data, isLoading } = useCountry(name);
 
   if (isLoading || !data) {
-    return <Loader />;
+    return <Loader id="loader" />;
   }
 
   const country = data?.[0];

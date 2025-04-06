@@ -59,7 +59,7 @@ export default function Home() {
   }, []);
 
   if (isLoading || !data) {
-    return <Loader />;
+    return <Loader id="loader" />;
   }
 
   return (
