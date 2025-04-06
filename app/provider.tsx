@@ -1,6 +1,6 @@
 'use client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { Header } from '@/components/layout/header/header';
 import { Main } from '@/components/layout/main/main';
 
@@ -15,7 +15,9 @@ export const Provider = ({ children }: Props) => {
     <QueryClientProvider client={queryClient}>
       <Header />
       <div id="loader"></div>
-      <Main>{children}</Main>
+      <Main>
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+      </Main>
     </QueryClientProvider>
   );
 };
